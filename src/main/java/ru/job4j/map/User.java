@@ -40,10 +40,14 @@ public class User {
                 new Calendar.Builder().setTimeOfDay(10, 11, 12, 13).build());
         int capacity = 16;
         Map<User, Object> map = new HashMap<>(capacity);
-        map.put(user1, new Object());
-        map.put(user2, new Object());
+        Object obj1 = new Object();
+        Object obj2 = new Object();
+        map.put(user1, obj1);
+        map.put(user2, obj2);
         System.out.println("Hashcode объекта 1: " + user1.hashCode());
         System.out.println("Hashcode объекта 2: " + user2.hashCode());
+        System.out.println(obj1);
+        System.out.println(obj2);
         System.out.println();
         System.out.println("Номер бакета для объекта 1: " + (user1.hashCode() & (capacity - 1)));
         System.out.println("Номер бакета для объекта 2: " + (user2.hashCode() & (capacity - 1)));
