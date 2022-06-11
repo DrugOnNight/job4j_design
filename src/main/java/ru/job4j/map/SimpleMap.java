@@ -29,7 +29,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
             modCount++;
             count++;
         }
-        System.out.println(capacity);
         return rsl;
     }
 
@@ -72,6 +71,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         int index = indexFor(hash(key.hashCode()));
         MapEntry<K, V> element = table[index];
         if (element != null
+                && element.key.hashCode() == key.hashCode()
                 && element.key.equals(key)) {
             table[index] = null;
             modCount++;
