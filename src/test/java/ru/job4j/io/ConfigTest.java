@@ -35,7 +35,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithEmptyLine() {
-        String path = "./data/pair_with_empty_Line.properties";
+        String path = "./data/pair_with_empty_line.properties";
         Config config = new Config(path);
         config.load();
         assertEquals(config.value("name"), "Oleg");
