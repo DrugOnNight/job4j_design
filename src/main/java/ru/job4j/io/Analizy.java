@@ -11,11 +11,11 @@ public class Analizy {
             String[] splitedLine;
             while ((line = in.readLine()) != null) {
                 splitedLine = line.split(" ", 2);
-                if ((splitedLine[0].equals("200") || splitedLine[0].equals("300"))
+                if (("200".equals(splitedLine[0]) || "300".equals(splitedLine[0]))
                         && !serverRunning) {
                     out.printf("%s%s%n", splitedLine[1], ";");
                     serverRunning = true;
-                } else if ((splitedLine[0].equals("400") || splitedLine[0].equals("500"))
+                } else if (("400".equals(splitedLine[0]) || "500".equals(splitedLine[0]))
                         && serverRunning) {
                     out.printf("%s%s", splitedLine[1], ";");
                     serverRunning = false;
