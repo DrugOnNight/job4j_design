@@ -16,7 +16,7 @@ public class Analizy {
                     out.printf("%s%s%n", splitedLine[1], ";");
                     serverRunning = true;
                 } else if ((splitedLine[0].equals("400") || splitedLine[0].equals("500"))
-                        && serverRunning){
+                        && serverRunning) {
                     out.printf("%s%s", splitedLine[1], ";");
                     serverRunning = false;
                 }
