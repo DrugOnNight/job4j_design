@@ -6,13 +6,21 @@ import static org.junit.Assert.*;
 public class ConfigTest {
 
     @Test
-    public void configTest() {
-        String path = "app.properties";
+    public void whenPairWithTwoEqualsSymbols() {
+        String path = "./data/pair_with_two_equals_symbols.properties";
         Config config = new Config(path);
         config.load();
-        assertEquals(config.value("name"), "Oleg");
-        assertEquals(config.value("surname"), "Godizov");
-        assertNull(config.value("age"));
+        assertEquals(config.value("name"), "oleg");
+        assertEquals(config.value("city"), "new=york");
+    }
+
+    @Test
+    public void whenSingleCharKey() {
+        String path = "./data/single_char_key.properties";
+        Config config = new Config(path);
+        config.load();
+        assertEquals(config.value("d"), "6");
+        assertEquals(config.value("name"), "oleg");
     }
 
     @Test
@@ -40,6 +48,14 @@ public class ConfigTest {
         config.load();
         assertEquals(config.value("name"), "Oleg");
         assertEquals(config.value("age"), "22");
+    }
+
+    @Test
+    public void whenCommentedPairThenNull() {
+        String path = "./data/commented_pair.properties";
+        Config config = new Config(path);
+        config.load();
+        assertNull(config.value("name"));
     }
 
     @Test(expected = IllegalArgumentException.class)
