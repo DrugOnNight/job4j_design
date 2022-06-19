@@ -35,4 +35,24 @@ public class ArgsNameTest {
     public void whenWrongSomeArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNoDashAhead() {
+        ArgsName jvm = ArgsName.of(new String[] {"enconding=UTF-8", "-Xmx=512"});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNoEqualsSymbol() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx512"});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNoKey() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "=512"});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenEmptyArguments() {
+        ArgsName jvm = ArgsName.of(new String[] {});
+    }
 }

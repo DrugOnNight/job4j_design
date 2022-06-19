@@ -15,15 +15,24 @@ public class ArgsName {
         return rsl;
     }
 
+    private void validate(String[] arg) {
+        if (arg.length < 2 || arg[0].isEmpty() || arg[0].equals("-") || arg[1].isEmpty()) {
+            throw new IllegalArgumentException("Argument must match pattern: -key=value");
+        }
+        if (!arg[0].startsWith("-")) {
+            throw new IllegalArgumentException("Argument must start with -");
+        }
+    }
+
     private void parse(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Missing required arguments!");
+        }
         String[] splitedParams;
         for (String arg : args) {
-            splitedParams = arg.substring(1).split("=", 2);
-            if (splitedParams.length != 2
-                    || splitedParams[0].isEmpty()
-                    || splitedParams[1].isEmpty()) {
-                throw new IllegalArgumentException("Incorrect argument. Usage key=value pattern");
-            }
+            splitedParams = arg.split("=", 2);
+            validate(splitedParams);
+            splitedParams[0] = splitedParams[0].substring(1);
             values.put(splitedParams[0], splitedParams[1]);
         }
     }
