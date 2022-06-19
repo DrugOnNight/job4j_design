@@ -5,11 +5,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
+
+    private void validate(ArgsName arguments) {
+        if (!arguments.get("e").startsWith(".")) {
+            throw new IllegalArgumentException("Argument -e must start with dot!");
+        }
+        File argD = new File(arguments.get("d"));
+        if (!argD.exists() || !argD.isDirectory()) {
+            throw new IllegalArgumentException("Argument -d must be an existing folder!");
+        }
+        if (!arguments.get("o").matches(".+[.]zip")) {
+            throw new IllegalArgumentException("Argument -o must match pattern *.zip");
+        }
+    }
 
     public void packFiles(List<Path> sources, Path target) {
         try (ZipOutputStream zip = new ZipOutputStream(
@@ -29,21 +41,13 @@ public class Zip {
 
     public static void main(String[] args) {
         ArgsName arguments = ArgsName.of(args);
-        if (arguments.get("e") == null
-                || arguments.get("d") == null
-                || arguments.get("o") == null) {
-            throw new IllegalArgumentException("Usage 3 params: -d=ROOT_DIR"
-                    + " -e=IGNORE_FILE_EXTENSION -o=OUTPUT_ZIP");
-        }
         Zip zip = new Zip();
+        zip.validate(arguments);
         List<Path> paths = new ArrayList<>();
         try {
             String argD = arguments.get("d");
             paths = Search.search(Paths.get(argD),
-                    elem -> !elem.getFileName().toString().endsWith(arguments.get("e")))
-                    .stream()
-                    .map(path -> Paths.get(argD).relativize(path))
-                    .collect(Collectors.toList());
+                    elem -> !elem.getFileName().toString().endsWith(arguments.get("e")));
         } catch (IOException e) {
             e.printStackTrace();
         }
