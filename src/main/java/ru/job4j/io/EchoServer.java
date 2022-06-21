@@ -16,12 +16,16 @@ public class EchoServer {
                     StringBuilder request = new StringBuilder();
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
                         request.append(str);
-                        System.out.println(str);
+                    }
+                    String parameter = request.toString().split(" ")[1];
+                    if ("/?msg=Hello".equals(parameter)) {
+                        out.write("Hello, dear friend!".getBytes());
+                    } else if ("/?msg=Bye".equals(parameter)) {
+                        server.close();
+                    } else if (parameter.contains("/?msg=")) {
+                        out.write("What?".getBytes());
                     }
                     out.flush();
-                    if (request.toString().contains("/?msg=Bye")) {
-                        server.close();
-                    }
                 }
             }
         }
