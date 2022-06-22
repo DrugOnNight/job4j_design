@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car name="Mark 2" year="2004" isRegistred="true">
+    <engine type="V6" power="360"/>
+    <owners>
+        <owner>Ivan</owner>
+        <owner>Oleg</owner>
+    </owners>
+</car>
