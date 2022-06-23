@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Engine {
     @XmlAttribute
     private String type;
+    @XmlAttribute
     private int power;
 
     public Engine() {
