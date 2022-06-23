@@ -1,10 +1,17 @@
 package ru.job4j.serialization;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class Engine implements Serializable {
+@XmlRootElement
+public class Engine {
+    @XmlAttribute
     private String type;
     private int power;
+
+    public Engine() {
+
+    }
 
     public Engine(String type, int power) {
         this.type = type;
