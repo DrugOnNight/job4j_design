@@ -33,6 +33,26 @@ public class Car {
         this.owners = owners;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public boolean isRegistered() {
+        return isRegistered;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public String[] getOwners() {
+        return owners;
+    }
+
     @Override
     public String toString() {
         return "Car{"
