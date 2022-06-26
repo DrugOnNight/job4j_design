@@ -63,7 +63,6 @@ public class FindTest {
     @Test
     public void whenFindByRegex() throws IOException {
         File f1 = temporaryFolder.newFile("oleg.txt");
-        File f2 = temporaryFolder.newFile("oleg.doc");
         temporaryFolder.newFile("oleg.xlsx");
         temporaryFolder.newFile("olega.txt");
         temporaryFolder.newFile("aoleg.txt");
@@ -77,8 +76,7 @@ public class FindTest {
                         "-o=" + target.getAbsolutePath()};
         Find.main(args);
         String ln = System.lineSeparator();
-        String expected = f2.getName() + ln
-                + f1.getName() + ln;
+        String expected = f1.getName() + ln;
         StringBuilder rsl = new StringBuilder();
         Files.lines(target.toPath()).forEach(file -> rsl.append(Paths.get(file).getFileName().toString()).append(ln));
         Assert.assertEquals(expected, rsl.toString());
