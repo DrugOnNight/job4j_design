@@ -1,0 +1,17 @@
+INSERT INTO roles(role) values('Admin');
+INSERT INTO roles(role) values('User');
+INSERT INTO users(name, role_id) values('Oleg', 1);
+INSERT INTO users(name, role_id) values('Ivan', 2);
+INSERT INTO rules(rule) values('Read');
+INSERT INTO rules(rule) values('Write');
+INSERT INTO role_rule(role_id, rule_id) values(1, 1);
+INSERT INTO role_rule(role_id, rule_id) values(1, 2);
+INSERT INTO role_rule(role_id, rule_id) values(2, 1);
+INSERT INTO category(title) values('consultation');
+INSERT INTO category(title) values('question');
+INSERT INTO state(name) values('in processing');
+INSERT INTO state(name) values('done');
+INSERT INTO items(user_id, category_id, state_id) values(2, 1, 2);
+INSERT INTO items(user_id, category_id, state_id) values(2, 2, 1);
+INSERT INTO comments(comment, item_id) values('Need consultation!', 1);
+INSERT INTO comments(comment, item_id) values('some question)', 2);
