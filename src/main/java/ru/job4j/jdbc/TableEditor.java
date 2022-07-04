@@ -18,7 +18,7 @@ public class TableEditor implements AutoCloseable {
     }
 
     private void initConnection() {
-        try{
+        try {
             this.connection = DriverManager.getConnection(
                 properties.getProperty("url"),
                 properties.getProperty("login"),
@@ -28,8 +28,8 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    private void executeStatement(String sql){
-        try (Statement statement = connection.createStatement()){
+    private void executeStatement(String sql) {
+        try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws IOException {
-        try(InputStream resource = TableEditor.class
+        try (InputStream resource = TableEditor.class
                 .getClassLoader()
                 .getResourceAsStream("app.properties")) {
             Properties properties = System.getProperties();
