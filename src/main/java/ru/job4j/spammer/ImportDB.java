@@ -21,12 +21,14 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader bf = new BufferedReader(new FileReader(dump))) {
-            bf.lines().map(line -> line.split(";"))
-                    .filter(elements -> elements.length == 2)
-                    .forEach(elements -> users.add(new User(
-                            elements[0],
-                            elements[1]
-                    )));
+            bf.lines().forEach(line -> {
+                String[] elements = line.split(";");
+                if (elements.length != 2 || elements[0].isEmpty() || elements[1].isEmpty()) {
+                    throw new IllegalArgumentException("Illegal data format. Usage: pass;email;");
+                }
+                users.add(new User(elements[0], elements[1]));
+            });
+
         }
         return users;
     }
