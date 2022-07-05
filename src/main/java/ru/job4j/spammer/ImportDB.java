@@ -36,8 +36,7 @@ public class ImportDB {
         try (Connection connection = DriverManager.getConnection(
                 cfg.getProperty("jdbc.url"),
                 cfg.getProperty("jdbc.username"),
-                cfg.getProperty("jdbc.password")))
-        {
+                cfg.getProperty("jdbc.password"))) {
             for (User user : users) {
                 try (PreparedStatement ps = connection.prepareStatement(
                         "INSERT INTO users(name, email) VALUES(?, ?);")) {
